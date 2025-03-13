@@ -8932,7 +8932,7 @@ __metadata:
     react-native-svg: "npm:15.11.2"
     react-native-tab-view: "npm:3.5.1"
     react-native-tcp: "npm:3.3.2"
-    react-native-text-input-mask: "npm:2.0.0"
+    react-native-text-input-mask: "npm:3.2.0"
     react-native-text-size: "rainbow-me/react-native-text-size#15b21c9f88c6df0d1b5e0f2ba792fe59b5dc255a"
     react-native-tooltip: "rainbow-me/react-native-tooltip#e0e88d212b5b7f350e5eabba87f588a32e0f2590"
     react-native-tooltips: "rainbow-me/react-native-tooltips#fdafbc7ba33ee231229f5d3f58b29d0d1c55ddfa"
@@ -22818,10 +22818,12 @@ react-native-safe-area-view@rainbow-me/react-native-safe-area-view:
   languageName: node
   linkType: hard
 
-"react-native-text-input-mask@npm:2.0.0":
-  version: 2.0.0
-  resolution: "react-native-text-input-mask@npm:2.0.0"
-  checksum: 10c0/ec13a01ea17b9e41ae9a7bfb6748d45d608d631ee35e92e9a7b7a6f3da69f774755cbd1ecf1a72e0d6cd66ba08e9969f8375202bb43d3f61ea2c0bf98731062a
+"react-native-text-input-mask@npm:3.2.0":
+  version: 3.2.0
+  resolution: "react-native-text-input-mask@npm:3.2.0"
+  peerDependencies:
+    react-native: ">=0.69.0"
+  checksum: 10c0/6bab8b2490f59893b959acbff238221ee4abb48f8eb921515bc9562956bd1f1701a3cb8c3364bbfe85faa5ab78f6a43726f4752f3154cb34489ee11effa1796e
   languageName: node
   linkType: hard
 
