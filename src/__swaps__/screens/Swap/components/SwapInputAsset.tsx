@@ -2,7 +2,7 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import React from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import Animated, { useDerivedValue } from 'react-native-reanimated';
-import { ScreenCornerRadius } from 'react-native-screen-corner-radius';
+// import { ScreenCornerRadius } from 'react-native-screen-corner-radius';
 
 import { AnimatedText, Box, Column, Columns, Stack, useColorMode } from '@/design-system';
 
@@ -27,6 +27,8 @@ import { CopyPasteMenu } from './CopyPasteMenu';
 const SELECT_LABEL = i18n.t(i18n.l.swap.select);
 const NO_BALANCE_LABEL = i18n.t(i18n.l.swap.no_balance);
 const TOKEN_TO_SWAP_LABEL = i18n.t(i18n.l.swap.token_to_swap);
+
+const ScreenCornerRadius = 20;
 
 function SwapInputActionButton() {
   const { isDarkMode } = useColorMode();

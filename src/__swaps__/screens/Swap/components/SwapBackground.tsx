@@ -2,7 +2,7 @@ import { Canvas, Rect, LinearGradient, vec, Paint } from '@shopify/react-native-
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDerivedValue, withTiming } from 'react-native-reanimated';
-import { ScreenCornerRadius } from 'react-native-screen-corner-radius';
+// import { ScreenCornerRadius } from 'react-native-screen-corner-radius';
 import { TIMING_CONFIGS } from '@/components/animations/animationConfigs';
 import { useColorMode } from '@/design-system';
 import { IS_ANDROID, IS_TEST } from '@/env';
@@ -12,6 +12,8 @@ import { DEVICE_HEIGHT, DEVICE_WIDTH } from '@/utils/deviceUtils';
 import { ETH_COLOR, ETH_COLOR_DARK } from '../constants';
 
 const DEFAULT_BACKGROUND_COLOR = getTintedBackgroundColor({ dark: ETH_COLOR_DARK, light: ETH_COLOR });
+
+const ScreenCornerRadius = 20;
 
 export const SwapBackground = () => {
   const { isDarkMode } = useColorMode();

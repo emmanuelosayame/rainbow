@@ -3,7 +3,7 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import React, { useCallback, useState } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import Animated, { runOnJS, useAnimatedReaction, useDerivedValue } from 'react-native-reanimated';
-import { ScreenCornerRadius } from 'react-native-screen-corner-radius';
+// import { ScreenCornerRadius } from 'react-native-screen-corner-radius';
 
 import { AnimatedSwapCoinIcon } from '@/__swaps__/screens/Swap/components/AnimatedSwapCoinIcon';
 import { BalanceBadge } from '@/__swaps__/screens/Swap/components/BalanceBadge';
@@ -28,6 +28,8 @@ import { CopyPasteMenu } from './CopyPasteMenu';
 const SELECT_LABEL = i18n.t(i18n.l.swap.select);
 const NO_BALANCE_LABEL = i18n.t(i18n.l.swap.no_balance);
 const TOKEN_TO_GET_LABEL = i18n.t(i18n.l.swap.token_to_get);
+
+const ScreenCornerRadius = 20;
 
 function SwapOutputActionButton() {
   const { isDarkMode } = useColorMode();

@@ -8920,9 +8920,8 @@ __metadata:
     react-native-reanimated: "npm:3.16.6"
     react-native-redash: "npm:16.3.0"
     react-native-restart: "npm:0.0.22"
-    react-native-safe-area-context: "npm:4.14.0"
+    react-native-safe-area-context: "npm:5.3.0"
     react-native-safe-area-view: rainbow-me/react-native-safe-area-view
-    react-native-screen-corner-radius: "npm:0.2.2"
     react-native-screens: "npm:3.35.0"
     react-native-section-list-get-item-layout: "npm:2.2.3"
     react-native-share: "npm:8.2.1"
@@ -8931,7 +8930,7 @@ __metadata:
     react-native-storage: "npm:1.0.1"
     react-native-svg: "npm:15.11.2"
     react-native-tab-view: "npm:3.5.1"
-    react-native-tcp: "npm:3.3.2"
+    react-native-tcp: "npm:4.0.0"
     react-native-text-input-mask: "npm:3.2.0"
     react-native-text-size: "rainbow-me/react-native-text-size#15b21c9f88c6df0d1b5e0f2ba792fe59b5dc255a"
     react-native-tooltip: "rainbow-me/react-native-tooltip#e0e88d212b5b7f350e5eabba87f588a32e0f2590"
@@ -22688,13 +22687,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:4.14.0":
-  version: 4.14.0
-  resolution: "react-native-safe-area-context@npm:4.14.0"
+"react-native-safe-area-context@npm:5.3.0":
+  version: 5.3.0
+  resolution: "react-native-safe-area-context@npm:5.3.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/70d71c5ec301fe811a1b3ca78555fdf3e845731177bc2ef72fb5e5d01fa97e9e14259114fe8c5366d91eceb57272887e19323d9355453353b82b2452c716a624
+  checksum: 10c0/3732f85444342f58f17709ecbbcfe754a0ebda1030765e8df0ce80413e95fcb34ee7d5e83b4627fbf383c13eeb50554c244aff3d908734eab67807aa6ca23bb6
   languageName: node
   linkType: hard
 
@@ -22707,16 +22706,6 @@ react-native-safe-area-view@rainbow-me/react-native-safe-area-view:
     react: "*"
     react-native: "*"
   checksum: 10c0/ebf8c0e261450dd2b6d113399384bd3577d1869fb4a6299ecbf689383ab5c19decfa2c6a3cf275297b69dd5ae2f0be9ff8837f74a1e40a059260092bd6f2ec95
-  languageName: node
-  linkType: hard
-
-"react-native-screen-corner-radius@npm:0.2.2":
-  version: 0.2.2
-  resolution: "react-native-screen-corner-radius@npm:0.2.2"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/8bdc2d3aeff94682c7833ae0780b55bb55138520615a67c356c0925786ad75ca47fc0d89a758983489060f4cd5560cc548b31bd25d40fa0631e41891622ca198
   languageName: node
   linkType: hard
 
@@ -22802,9 +22791,9 @@ react-native-safe-area-view@rainbow-me/react-native-safe-area-view:
   languageName: node
   linkType: hard
 
-"react-native-tcp@npm:3.3.2":
-  version: 3.3.2
-  resolution: "react-native-tcp@npm:3.3.2"
+"react-native-tcp@npm:4.0.0":
+  version: 4.0.0
+  resolution: "react-native-tcp@npm:4.0.0"
   dependencies:
     base64-js: "npm:0.0.8"
     buffer: "npm:^5.0.0"
@@ -22813,8 +22802,8 @@ react-native-safe-area-view@rainbow-me/react-native-safe-area-view:
     process: "npm:^0.11.9"
     util: "npm:^0.10.3"
   peerDependencies:
-    react-native: ">=0.40.0"
-  checksum: 10c0/2212c168cc362c17e50104380cbf007bdd96cc600a347ac333e79ba5f9fce05dc1ef5432eaa0d229e87fd5362fffc93ee24e0b6ea7f33622b892058d697d4436
+    react-native: ">=0.60.0"
+  checksum: 10c0/3ca7179c02be883f66231e63542f15d06668020da063cb581e7dd5495c4490bbc0766455036b66485ef35f5b6af8e5e5a4c9318f56ecf0c7dce1f305609904a3
   languageName: node
   linkType: hard
 

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import Animated, { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
-import { ScreenCornerRadius } from 'react-native-screen-corner-radius';
+// import { ScreenCornerRadius } from 'react-native-screen-corner-radius';
 
 import { Page } from '@/components/layout';
 import { navbarHeight } from '@/components/navbar/Navbar';
@@ -68,6 +68,8 @@ import { useSwapsSearchStore } from './resources/search/searchV2';
  *
  * tldr, ⚡️ it’s fast ⚡️
  */
+
+const ScreenCornerRadius = 20;
 
 export function SwapScreen() {
   return (
