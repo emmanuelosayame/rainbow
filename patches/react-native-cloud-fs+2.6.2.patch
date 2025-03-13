@@ -57,7 +57,7 @@ index 917e1ba..0000000
 -*.jks
 -
 diff --git a/node_modules/react-native-cloud-fs/android/build.gradle b/node_modules/react-native-cloud-fs/android/build.gradle
-index 340d577..7d92993 100644
+index 340d577..7655f22 100644
 --- a/node_modules/react-native-cloud-fs/android/build.gradle
 +++ b/node_modules/react-native-cloud-fs/android/build.gradle
 @@ -1,5 +1,5 @@
@@ -67,51 +67,26 @@ index 340d577..7d92993 100644
          google()
          mavenCentral()
      }
-@@ -11,8 +11,8 @@ buildscript {
- apply plugin: 'com.android.library'
- 
- android {
--    compileSdkVersion 31
--    buildToolsVersion "28.0.3"
-+    compileSdkVersion 33
-+    buildToolsVersion "31.0.0"
- 
-     defaultConfig {
-         minSdkVersion 21
-@@ -23,9 +23,11 @@ android {
-             abiFilters "armeabi-v7a", "x86"
-         }
+@@ -41,13 +41,16 @@ allprojects {
+         google()
+         mavenCentral()
      }
--    lintOptions {
-+
-+    lint {
-         warning 'InvalidPackage'
-     }
-+
-     compileOptions {
-         sourceCompatibility JavaVersion.VERSION_1_8
-         targetCompatibility JavaVersion.VERSION_1_8
-@@ -45,8 +47,10 @@ allprojects {
++    configurations.all {
++        resolutionStrategy {
++            force 'com.google.android.gms:play-services-auth:17.0.0'
++        }
++    }
+ }
  
  dependencies {
      implementation 'com.google.android.gms:play-services-drive:17.0.0'
 -    implementation ('com.google.android.gms:play-services-auth:17.0.0') {
 -        force = true;
-+    implementation('com.google.android.gms:play-services-auth:20.4.1') {
-+        version {
-+            strictly '20.4.1'
-+        }
-     }
+-    }
++    implementation 'com.google.android.gms:play-services-auth:17.0.0'
      implementation 'com.google.http-client:google-http-client-gson:1.26.0'
      implementation('com.google.api-client:google-api-client-android:1.26.0') {
-@@ -56,6 +60,7 @@ dependencies {
          exclude group: 'org.apache.httpcomponents'
-     }
-     implementation 'com.facebook.react:react-native:+'
-+
-     // Explicit Guava dependencies
-     implementation 'com.google.guava:guava:31.1-android'
-     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 diff --git a/node_modules/react-native-cloud-fs/ios/.gitignore b/node_modules/react-native-cloud-fs/ios/.gitignore
 deleted file mode 100644
 index cd45c49..0000000

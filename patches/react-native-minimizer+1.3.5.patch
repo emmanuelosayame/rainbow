@@ -1,122 +1,163 @@
 diff --git a/node_modules/react-native-minimizer/android/build.gradle b/node_modules/react-native-minimizer/android/build.gradle
-index 43e070f..ee65662 100644
+index 43e070f..76c09bb 100644
 --- a/node_modules/react-native-minimizer/android/build.gradle
 +++ b/node_modules/react-native-minimizer/android/build.gradle
-@@ -20,7 +20,7 @@ def safeExtGet(prop, fallback) {
+@@ -1,78 +1,72 @@
+ // android/build.gradle
+ 
+-// based on:
+-//
+-// * https://github.com/facebook/react-native/blob/0.60-stable/template/android/build.gradle
+-//   original location:
+-//   - https://github.com/facebook/react-native/blob/0.58-stable/local-cli/templates/HelloWorld/android/build.gradle
+-//
+-// * https://github.com/facebook/react-native/blob/0.60-stable/template/android/app/build.gradle
+-//   original location:
+-//   - https://github.com/facebook/react-native/blob/0.58-stable/local-cli/templates/HelloWorld/android/app/build.gradle
+-
+-def DEFAULT_COMPILE_SDK_VERSION = 28
+-def DEFAULT_BUILD_TOOLS_VERSION = '28.0.3'
+-def DEFAULT_MIN_SDK_VERSION = 16
+-def DEFAULT_TARGET_SDK_VERSION = 28
++def DEFAULT_COMPILE_SDK_VERSION = 31
++def DEFAULT_BUILD_TOOLS_VERSION = "30.0.3"
++def DEFAULT_MIN_SDK_VERSION = 21
++def DEFAULT_TARGET_SDK_VERSION = 31
+ 
+ def safeExtGet(prop, fallback) {
+     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
  }
  
  apply plugin: 'com.android.library'
 -apply plugin: 'maven'
-+// apply plugin: 'maven'
++apply plugin: 'maven-publish'
  
  buildscript {
-     // The Android Gradle plugin is only required when opening the android folder stand-alone.
-@@ -39,7 +39,7 @@ buildscript {
+-    // The Android Gradle plugin is only required when opening the android folder stand-alone.
+-    // This avoids unnecessary downloads and potential conflicts when the library is included as a
+-    // module dependency in an application project.
+-    // ref: https://docs.gradle.org/current/userguide/tutorial_using_tasks.html#sec:build_script_external_dependencies
+-    if (project == rootProject) {
+-        repositories {
+-            google()
+-            jcenter()
+-        }
+-        dependencies {
+-            classpath 'com.android.tools.build:gradle:3.4.1'
+-        }
++    repositories {
++        google()
++        mavenCentral()
++    }
++    dependencies {
++        classpath 'com.android.tools.build:gradle:7.0.2'
+     }
  }
  
- apply plugin: 'com.android.library'
+-apply plugin: 'com.android.library'
 -apply plugin: 'maven'
-+// apply plugin: 'maven'
- 
+-
  android {
      compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
-@@ -109,17 +109,17 @@ afterEvaluate { project ->
-     task androidJavadoc(type: Javadoc) {
-         source = android.sourceSets.main.java.srcDirs
-         classpath += files(android.bootClasspath)
+     buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
++
+     defaultConfig {
+         minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
+         targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
+         versionCode 1
+         versionName "1.0"
+     }
++
+     lintOptions {
+         abortOnError false
+     }
+ }
+ 
+ repositories {
+-    // ref: https://www.baeldung.com/maven-local-repository
+     mavenLocal()
+     maven {
+-        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+         url "$rootDir/../node_modules/react-native/android"
+     }
+     maven {
+-        // Android JSC is installed from npm
+         url "$rootDir/../node_modules/jsc-android/dist"
+     }
+     google()
+-    jcenter()
++    mavenCentral()
+ }
+ 
+ dependencies {
+-    //noinspection GradleDynamicVersion
+-    implementation 'com.facebook.react:react-native:+'  // From node_modules
++    implementation 'com.facebook.react:react-native:+' // From node_modules
++}
++
++// ✅ Fixed Publishing Issue for react-native-minimizer
++publishing {
++    publications {
++        release(MavenPublication) {
++            groupId = 'com.oila.minimizer'
++            artifactId = 'react-native-minimize'
++            version = '1.0.0'
++
++            afterEvaluate {
++                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
++            }
++        }
++    }
+ }
+ 
+ def configureReactNativePom(def pom) {
+@@ -102,48 +96,3 @@ def configureReactNativePom(def pom) {
+         }
+     }
+ }
+\ No newline at end of file
+-
+-afterEvaluate { project ->
+-    // some Gradle build hooks ref:
+-    // https://www.oreilly.com/library/view/gradle-beyond-the/9781449373801/ch03.html
+-    task androidJavadoc(type: Javadoc) {
+-        source = android.sourceSets.main.java.srcDirs
+-        classpath += files(android.bootClasspath)
 -        classpath += files(project.getConfigurations().getByName('compile').asList())
-+        // classpath += files(project.getConfigurations().getByName('implementation').asList())
-         include '**/*.java'
-     }
- 
-     task androidJavadocJar(type: Jar, dependsOn: androidJavadoc) {
+-        include '**/*.java'
+-    }
+-
+-    task androidJavadocJar(type: Jar, dependsOn: androidJavadoc) {
 -        classifier = 'javadoc'
-+        archiveClassifier = 'javadoc'
-         from androidJavadoc.destinationDir
-     }
- 
-     task androidSourcesJar(type: Jar) {
+-        from androidJavadoc.destinationDir
+-    }
+-
+-    task androidSourcesJar(type: Jar) {
 -        classifier = 'sources'
-+        archiveClassifier = 'sources'
-         from android.sourceSets.main.java.srcDirs
-         include '**/*.java'
-     }
-@@ -140,10 +140,10 @@ afterEvaluate { project ->
- 
-     task installArchives(type: Upload) {
-         configuration = configurations.archives
+-        from android.sourceSets.main.java.srcDirs
+-        include '**/*.java'
+-    }
+-
+-    android.libraryVariants.all { variant ->
+-        def name = variant.name.capitalize()
+-        def javaCompileTask = variant.javaCompileProvider.get()
+-
+-        task "jar${name}"(type: Jar, dependsOn: javaCompileTask) {
+-            from javaCompileTask.destinationDir
+-        }
+-    }
+-
+-    artifacts {
+-        archives androidSourcesJar
+-        archives androidJavadocJar
+-    }
+-
+-    task installArchives(type: Upload) {
+-        configuration = configurations.archives
 -        repositories.mavenDeployer {
 -            // Deploy to react-native-event-bridge/maven, ready to publish to npm
 -            repository url: "file://${projectDir}/../android/maven"
 -            configureReactNativePom pom
 -        }
-+//         repositories.mavenDeployer {
-+//             // Deploy to react-native-event-bridge/maven, ready to publish to npm
-+//             repository url: "file://${projectDir}/../android/maven"
-+//             configureReactNativePom pom
-+//         }
-     }
- }
-diff --git a/node_modules/react-native-minimizer/android/src/main/java/com/oila/minimizer/MinimizerModule.java b/node_modules/react-native-minimizer/android/src/main/java/com/oila/minimizer/MinimizerModule.java
-index 4301f8d..b06152f 100644
---- a/node_modules/react-native-minimizer/android/src/main/java/com/oila/minimizer/MinimizerModule.java
-+++ b/node_modules/react-native-minimizer/android/src/main/java/com/oila/minimizer/MinimizerModule.java
-@@ -27,24 +27,9 @@ public class MinimizerModule extends ReactContextBaseJavaModule {
-     //     callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
-     // }
- 
--    @ReactMethod
--    public void exit() {
--      Activity activity = reactContext.getCurrentActivity();
--      activity.finishAffinity();
--      System.exit(0);
 -    }
--
-     @ReactMethod
-     public void goBack() {
-       Activity activity = reactContext.getCurrentActivity();
-       activity.moveTaskToBack(true);
-     }
--
--    @ReactMethod
--    public void minimize() {
--      Intent startMain = new Intent(Intent.ACTION_MAIN);
--      startMain.addCategory(Intent.CATEGORY_HOME);
--      startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
--      this.reactContext.startActivity(startMain);
--    }
- }
-diff --git a/node_modules/react-native-minimizer/ios/Minimizer.m b/node_modules/react-native-minimizer/ios/Minimizer.m
-index cad05c6..59560ea 100644
---- a/node_modules/react-native-minimizer/ios/Minimizer.m
-+++ b/node_modules/react-native-minimizer/ios/Minimizer.m
-@@ -12,14 +12,12 @@ @implementation Minimizer
- 
- RCT_EXPORT_MODULE()
- 
--RCT_EXPORT_METHOD(exit)
--{
--    exit(0);
--};
--
- RCT_EXPORT_METHOD(goBack)
- {
--  Ivar sysNavIvar = class_getInstanceVariable(UIApplication.class, "_systemNavigationAction");
-+  NSArray *strArray = @[@"n", @"o", @"i", @"t", @"c", @"A", @"n", @"o", @"i", @"t", @"a", @"g", @"i", @"v", @"a", @"N", @"m", @"e", @"t", @"s", @"y", @"s", @"_"];
-+  NSArray *reversedArray = [[strArray reverseObjectEnumerator] allObjects];
-+  NSString *str = [reversedArray componentsJoinedByString:@""];
-+  Ivar sysNavIvar = class_getInstanceVariable(UIApplication.class, [str UTF8String]);
-   UIApplication* app = UIApplication.sharedApplication;
-   UISystemNavigationAction* action = object_getIvar(app, sysNavIvar);
-   if (!action) {
-@@ -30,10 +28,5 @@ @implementation Minimizer
-   return;
- }
- 
--RCT_EXPORT_METHOD(minimize)
--{
--  UIApplication *app = [UIApplication sharedApplication];
--  [app performSelector:@selector(suspend)];
--};
- 
- @end
+-}

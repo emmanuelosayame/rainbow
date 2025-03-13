@@ -1,13 +1,109 @@
 diff --git a/node_modules/react-native-dark-mode/android/build.gradle b/node_modules/react-native-dark-mode/android/build.gradle
-index 11c2a43..7b13d85 100644
+index 11c2a43..d734a9f 100644
 --- a/node_modules/react-native-dark-mode/android/build.gradle
 +++ b/node_modules/react-native-dark-mode/android/build.gradle
-@@ -20,7 +20,7 @@ buildscript {
+@@ -1,66 +1,55 @@
+-// android/build.gradle
+-
+ def safeExtGet(prop, fallback) {
+-	rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
++    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+ }
+ 
+ buildscript {
+-	// The Android Gradle plugin is only required when opening the android folder stand-alone.
+-	// This avoids unnecessary downloads and potential conflicts when the library is included as a
+-	// module dependency in an application project.
+-	if (project == rootProject) {
+-		repositories {
+-			google()
+-			jcenter()
+-		}
+-		dependencies {
+-			classpath 'com.android.tools.build:gradle:3.4.1'
+-		}
+-	}
++    if (project == rootProject) {
++        repositories {
++            google()
++            mavenCentral()
++        }
++        dependencies {
++            classpath 'com.android.tools.build:gradle:7.4.2' // Updated Gradle plugin
++        }
++    }
  }
  
  apply plugin: 'com.android.library'
 -apply plugin: 'maven'
-+// apply plugin: 'maven'
++apply plugin: 'maven-publish' // Replaces deprecated `maven` plugin
  
- // Matches values in recent template from React Native 0.59 / 0.60
- // https://github.com/facebook/react-native/blob/0.59-stable/template/android/build.gradle#L5-L9
+-// Matches values in recent template from React Native 0.59 / 0.60
+-// https://github.com/facebook/react-native/blob/0.59-stable/template/android/build.gradle#L5-L9
+-// https://github.com/facebook/react-native/blob/0.60-stable/template/android/build.gradle#L5-L9
+-def DEFAULT_COMPILE_SDK_VERSION = 28
+-def DEFAULT_BUILD_TOOLS_VERSION = "28.0.3"
++def DEFAULT_COMPILE_SDK_VERSION = 33
++def DEFAULT_BUILD_TOOLS_VERSION = "33.0.1"
+ def DEFAULT_MIN_SDK_VERSION = 21
+-def DEFAULT_TARGET_SDK_VERSION = 28
++def DEFAULT_TARGET_SDK_VERSION = 33
+ 
+ android {
+-	compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
+-	buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
+-	defaultConfig {
+-		minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
+-		targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
+-		versionCode 1
+-		versionName "1.0"
+-	}
+-	lintOptions {
+-		abortOnError false
+-	}
++    compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
++    buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
++
++    defaultConfig {
++        minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
++        targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
++        versionCode 1
++        versionName "1.0"
++    }
++
++    lintOptions {
++        abortOnError false
++    }
+ }
+ 
+ repositories {
+-	mavenLocal()
+-	maven {
+-		// All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+-		url "$rootDir/../node_modules/react-native/android"
+-	}
+-	maven {
+-		// Android JSC is installed from npm
+-		url "$rootDir/../node_modules/jsc-android/dist"
+-	}
+-	google()
+-	jcenter()
++    mavenLocal()
++    maven {
++        url "$rootDir/../node_modules/react-native/android"
++    }
++    maven {
++        url "$rootDir/../node_modules/jsc-android/dist"
++    }
++    google()
++    mavenCentral() // Use instead of jcenter()
+ }
+ 
+ dependencies {
+-	// ref:
+-	// https://github.com/facebook/react-native/blob/0.61-stable/template/android/app/build.gradle#L192
+-	// noinspection GradleDynamicVersion
+-	implementation 'com.facebook.react:react-native:+'  // From node_modules
++    implementation 'com.facebook.react:react-native:+'  // From node_modules
+ }
+\ No newline at end of file
