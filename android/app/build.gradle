@@ -115,10 +115,15 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 android {
     def envFile = project.file('../../.env')
     def env = [:]
-    envFile.eachLine {
-        if (it.contains('=') && (!it.startsWith("#"))) {
-            def (key, value) = it.split('=')
-            env[key] = value
+
+    if (envFile.exists()) {
+        envFile.withReader('UTF-8') { reader ->
+            reader.eachLine { line ->
+                if (line.contains('=') && !line.startsWith("#")) {
+                    def (key, value) = line.split('=', 2)
+                    env[key.trim()] = value.trim()
+                }
+            }
         }
     }
 
@@ -142,11 +147,11 @@ android {
         renderscriptSupportModeEnabled true
         multiDexEnabled true
         testBuildType System.getProperty('testBuildType', 'debug')
-        missingDimensionStrategy 'detox', 'full'        
+        missingDimensionStrategy 'detox', 'full'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
         manifestPlaceholders = [
-            BRANCH_KEY: env.get('BRANCH_KEY')
+            BRANCH_KEY: env.get('BRANCH_KEY', "")
         ]
 
         ndk {
@@ -162,7 +167,7 @@ android {
             keyPassword 'android'
         }
 
-        def pass = System.getenv('RAINBOW_KEY_ANDROID_PASSWORD') ?: getPassword("rainbow","rainbow-android-key")
+        def pass = System.getenv('RAINBOW_KEY_ANDROID_PASSWORD') ?: getPassword("rainbow", "rainbow-android-key")
 
         release {
             storeFile file('../keystores/rainbow-key.keystore')
@@ -177,12 +182,9 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://facebook.github.io/react-native/docs/signed-apk-android.
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            // Detox-specific additions to pro-guard
             proguardFile "${rootProject.projectDir}/../node_modules/detox/android/detox/proguard-rules-app.pro"
         }
     }
@@ -195,8 +197,7 @@ android {
         pickFirst '**/x86_64/libc++_shared.so'
         pickFirst '**/x86/libjsc.so'
         pickFirst '**/armeabi-v7a/libjsc.so'
-        // exclude
-        exclude 'META-INF/DEPENDENCIES'
+        
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/license.txt'

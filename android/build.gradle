@@ -3,7 +3,6 @@ import org.apache.tools.ant.taskdefs.condition.Os
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-
     ext {
         buildToolsVersion = "34.0.0"
         minSdkVersion = 26
@@ -11,44 +10,37 @@ buildscript {
         targetSdkVersion = 34
         ndkVersion = "26.1.10909125"
         kotlin_version = "1.9.22"
-        kotlinVersion = "1.9.22"
         androidXCore = "1.6.0"
     }
 
     repositories {
         google()
-        jcenter()
-         maven {
-            url 'https://maven.fabric.io/public'
-        }
         mavenCentral()
         maven {
             url("${rootProject.projectDir}/../node_modules/detox/Detox-android")
         }
+        maven { url 'https://www.jitpack.io' }
     }
+
     dependencies {
-        classpath("com.android.tools.build:gradle")
+        classpath("com.android.tools.build:gradle:8.2.0") // Specify version
         classpath("com.facebook.react:react-native-gradle-plugin")
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22"
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
         classpath("de.undercouch:gradle-download-task:5.0.1")
-        classpath 'com.google.gms:google-services:4.3.15'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.2'
-        classpath 'io.fabric.tools:gradle:1.28.1'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath("com.google.gms:google-services:4.3.15")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.2")
     }
-    allprojects {
+}
+
+allprojects {
     repositories {
         google()
         mavenLocal()
         mavenCentral {
-            // We don't want to fetch react-native from Maven Central as there are
-            // older versions over there.
             content {
                 excludeGroup "com.facebook.react"
             }
         }
-        jcenter()
         maven {
             url 'https://maven.google.com'
         }
@@ -64,8 +56,8 @@ buildscript {
             // All of Detox' artifacts are provided via the npm module
             url "$rootDir/../node_modules/detox/Detox-android"
         }
-        maven { url 'https://www.jitpack.io' }
     }
+
     afterEvaluate { project ->
         if (!project.name.equalsIgnoreCase("app") && project.hasProperty("android")) {
             android {
@@ -73,11 +65,8 @@ buildscript {
                     compileSdkVersion rootProject.ext.compileSdkVersion
                     buildToolsVersion rootProject.ext.buildToolsVersion
                     minSdkVersion rootProject.ext.minSdkVersion
-
                 }
             }
         }
     }
-}
-
 }
