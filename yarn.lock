@@ -8819,7 +8819,7 @@ __metadata:
     react-native-extra-dimensions-android: "npm:1.2.2"
     react-native-fast-image: "npm:8.5.11"
     react-native-fs: "npm:2.16.6"
-    react-native-gesture-handler: "npm:2.24.0"
+    react-native-gesture-handler: "npm:2.21.2"
     react-native-get-random-values: "npm:1.5.0"
     react-native-haptic-feedback: "npm:2.2.0"
     react-native-image-crop-picker: "npm:0.42.0"
@@ -8835,7 +8835,6 @@ __metadata:
     react-native-mmkv: "npm:2.12.2"
     react-native-os: "rainbow-me/react-native-os#41a08e45260b8c1c53c77ad00e13ae954cb9337c"
     react-native-pager-view: "npm:5.4.24"
-    react-native-palette-full: "npm:1.2.0"
     react-native-permissions: "npm:3.10.1"
     react-native-quick-md5: "npm:3.0.6"
     react-native-radial-gradient: "rainbow-me/react-native-radial-gradient#b99ab59d27dba70364ef516bd5193c37657ba95c"
@@ -8853,7 +8852,6 @@ __metadata:
     react-native-storage: "npm:1.0.1"
     react-native-svg: "npm:15.11.2"
     react-native-tab-view: "npm:3.5.1"
-    react-native-text-input-mask: "npm:3.2.0"
     react-native-text-size: "rainbow-me/react-native-text-size#15b21c9f88c6df0d1b5e0f2ba792fe59b5dc255a"
     react-native-tooltip: "rainbow-me/react-native-tooltip#e0e88d212b5b7f350e5eabba87f588a32e0f2590"
     react-native-tooltips: "rainbow-me/react-native-tooltips#fdafbc7ba33ee231229f5d3f58b29d0d1c55ddfa"
@@ -22291,17 +22289,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-gesture-handler@npm:2.24.0":
-  version: 2.24.0
-  resolution: "react-native-gesture-handler@npm:2.24.0"
+"react-native-gesture-handler@npm:2.21.2":
+  version: 2.21.2
+  resolution: "react-native-gesture-handler@npm:2.21.2"
   dependencies:
     "@egjs/hammerjs": "npm:^2.0.17"
     hoist-non-react-statics: "npm:^3.3.0"
     invariant: "npm:^2.2.4"
+    prop-types: "npm:^15.7.2"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/eb2c5cb53690ae5de1482370a156cbd775f6b3054540cd47310ec4712df83a280fe7b6259f372eec4c14a6d7f70ab18f1919a9fe63beaca9ceae126edbe32298
+  checksum: 10c0/4eca796efe9e55f312f332c07eee76adf0b29971945b72856d375f7e9a6f21a7ef5363d707b71d030c5ebccc0a3cf085713ee0365c14bc538f2f918a87986e36
   languageName: node
   linkType: hard
 
@@ -22455,16 +22454,6 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/6571117be40b45ede07f5fccd4a7f5bcc2869d5fbf944c5ababad0e75c5a1948861da75c92418d7462ed00b28a4a7b8838690e9ee260abc4d0e66eade18428fe
-  languageName: node
-  linkType: hard
-
-"react-native-palette-full@npm:1.2.0":
-  version: 1.2.0
-  resolution: "react-native-palette-full@npm:1.2.0"
-  peerDependencies:
-    react: "*"
-    react-native: ">=0.46"
-  checksum: 10c0/56e1f73775f17d4cf7cbb63e73b80ed709af12f92b6c95da1151bf63baf31acc5153ed8d3a62e507b300ddf7a394d5cd1854efba23575142e4ced1c49bbb7d1d
   languageName: node
   linkType: hard
 
@@ -22663,15 +22652,6 @@ react-native-safe-area-view@rainbow-me/react-native-safe-area-view:
     react-native: "*"
     react-native-pager-view: "*"
   checksum: 10c0/a4b1a3c49618cbe0ee041fce03897e1ea4bf4cad9bdbbe3167ba74be5b1b0d495ee6376a1150ecb9be333ad692baf1877c79af37d2baea864ace1d30c98d0719
-  languageName: node
-  linkType: hard
-
-"react-native-text-input-mask@npm:3.2.0":
-  version: 3.2.0
-  resolution: "react-native-text-input-mask@npm:3.2.0"
-  peerDependencies:
-    react-native: ">=0.69.0"
-  checksum: 10c0/6bab8b2490f59893b959acbff238221ee4abb48f8eb921515bc9562956bd1f1701a3cb8c3364bbfe85faa5ab78f6a43726f4752f3154cb34489ee11effa1796e
   languageName: node
   linkType: hard
 

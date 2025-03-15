@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-// @ts-expect-error - no declaration file
-import TextInputMask from 'react-native-text-input-mask';
+// import TextInputMask from 'react-native-text-input-mask';
 import { ButtonPressAnimation } from '@/components/animations';
 import styled from '@/styled-thing';
 import { buildTextStyles, margin, padding } from '@/styles';
@@ -23,7 +22,7 @@ type GweiInputPillProps = {
   testID: string;
 };
 
-const GweiNumberInput = styled(TextInputMask).attrs(
+const GweiNumberInput = styled(TextInput).attrs(
   // @ts-expect-error
   ({ theme: { colors }, value }) => ({
     color: !value && colors.alpha(colors.blueGreyDark, 0.4),
